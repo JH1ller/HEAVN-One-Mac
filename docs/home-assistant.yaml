@@ -1,0 +1,31 @@
+# Merge these into configuration.yaml; keep a single rest_command section.
+# Reserve/update this Mac's IP address: MAC_LAN_IP.
+# Run heavn_bridge.py on that Mac, awake and within Bluetooth range of the lamp.
+# In secrets.yaml add the same token used to start the bridge:
+# heavn_bridge_authorization: "Bearer YOUR_SAVED_TOKEN"
+
+rest_command:
+  heavn_on:
+    url: "http://MAC_LAN_IP:8765/on"
+    method: post
+    timeout: 45
+    headers:
+      authorization: !secret heavn_bridge_authorization
+
+  heavn_off:
+    url: "http://MAC_LAN_IP:8765/off"
+    method: post
+    timeout: 45
+    headers:
+      authorization: !secret heavn_bridge_authorization
+
+  heavn_toggle:
+    url: "http://MAC_LAN_IP:8765/toggle"
+    method: post
+    timeout: 45
+    headers:
+      authorization: !secret heavn_bridge_authorization
+
+# Example automation action:
+# actions:
+#   - action: rest_command.heavn_on
